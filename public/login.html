@@ -13,7 +13,7 @@
         }
         
         body {
-            background-image: url('https://blog.hopihari.com.br/wp-content/uploads/2024/08/CapaMaio-Hopi-Hari-4o-lugar-no-ranking-dos-parques-mais-visitados-da-America-Latina-1.png');
+            background-image: url('img/img_fundo.png');
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -155,22 +155,25 @@
 </head>
 <body>
     <div class="login-container">
+        <form action="adm_login.html">
+            <button class="logout-btn" >Admin</button>
+        </form>
         <div class="login-logo">
-            <img src="https://lh3.googleusercontent.com/drive-storage/AJQWtBOezgILoExq0H1ytBSemTe6OwK_xaWG5ZkG2FWp-kyRm1HfN5OMaK3xqJZo4rfyQrl4YTix3hBPYByZyacB1MMrjZ4R0r3tiOteh5cgXDO7mw=w1920-h945" alt="Logo Hopi Hari">
+            <img src="img/logo.png" alt="Logo Hopi Hari">
         </div>
         <h1>Área do Visitante</h1>
-        <form>
+        <form id="loginForm">
             <div class="input-group">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="Seu e-mail" required>
+                <input type="email" id="email" name="email" placeholder="Seu e-mail" required>
             </div>
             <div class="input-group">
                 <label for="password">Senha</label>
-                <input type="password" id="password" placeholder="Sua senha" required>
+                <input type="password" id="password" name="password" placeholder="Sua senha" required>
             </div>
             <div class="remember-forgot">
                 <div class="remember">
-                    <input type="checkbox" id="remember">
+                    <input type="checkbox" id="remember" name="remember">
                     <label for="remember">Lembrar-me</label>
                 </div>
                 <div class="forgot">
@@ -178,10 +181,47 @@
                 </div>
             </div>
             <button type="submit" class="login-btn">ENTRAR</button>
-            <div class="register">
-                Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a>
+            <div class="register">Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a>
             </div>
         </form>
+        
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
+            
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Salvar dados do usuário no localStorage (para demonstração)
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    // Redirecionar para a página principal (após login bem-sucedido)
+                    alert('Login realizado com sucesso!');
+                    window.location.href = '/dashboard.html';  // Página após login
+                } else {
+                    alert(`Erro: ${data.message || 'Credenciais inválidas'}`);
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro de conexão. Tente novamente mais tarde.');
+            }
+        });
+    </script>
 </body>
 </html>
