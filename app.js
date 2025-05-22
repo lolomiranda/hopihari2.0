@@ -1,4 +1,4 @@
-
+// app.js - Arquivo principal da aplicação
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -30,12 +30,8 @@ app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
-app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin.html'));
-});
 
 // Iniciar o servidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
-

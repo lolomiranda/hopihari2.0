@@ -4,7 +4,7 @@ const mysql = require('mysql2/promise');
 const dbConfig = {
     host: 'localhost',
     user: 'root',
-    password: 'root',  // Senha padrão do XAMPP é vazia
+    password: 'root',  
     database: 'hopi_hari_db',
     port: 3306, // Porta padrão do MySQL
 };
@@ -26,4 +26,3 @@ const testConnection = async () => {
 testConnection();
 
 module.exports = pool;
-

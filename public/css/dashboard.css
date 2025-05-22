@@ -1,8 +1,16 @@
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.mapa {
+width: 100%;
+height: auto;
+display: block;
 }
 
 body {
@@ -355,13 +363,6 @@ body {
     .user-info {
         display: none;
     }
-}
-
-.mapa {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
 }
 
 /* Menu mobile */
